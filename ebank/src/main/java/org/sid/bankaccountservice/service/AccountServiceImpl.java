@@ -32,12 +32,34 @@ public class AccountServiceImpl implements AccountService {
 
         BankAccount savedBankAccount = bankAccountRepository.save(bankAccount);
 
+        return toResponseDTO(savedBankAccount);
+    }
+
+    @Override
+    public BankAccountResponseDTO updateAccount(String id, BankAccountRequestDTO bankAccountDTO) {
+        BankAccount bankAccount = bankAccountRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException(String.format("Account %s not found", id)));
+
+        if (bankAccountDTO.getBalance() != null) {
+            bankAccount.setBalance(bankAccountDTO.getBalance());
+        }
+        if (bankAccountDTO.getCurrency() != null) {
+            bankAccount.setCurrency(bankAccountDTO.getCurrency());
+        }
+        if (bankAccountDTO.getType() != null) {
+            bankAccount.setType(bankAccountDTO.getType());
+        }
+
+        return toResponseDTO(bankAccountRepository.save(bankAccount));
+    }
+
+    private BankAccountResponseDTO toResponseDTO(BankAccount bankAccount) {
         return BankAccountResponseDTO.builder()
-                .id(savedBankAccount.getId())
-                .createdAt(savedBankAccount.getCreatedAt())
-                .balance(savedBankAccount.getBalance())
-                .currency(savedBankAccount.getCurrency())
-                .type(savedBankAccount.getType())
+                .id(bankAccount.getId())
+                .createdAt(bankAccount.getCreatedAt())
+                .balance(bankAccount.getBalance())
+                .currency(bankAccount.getCurrency())
+                .type(bankAccount.getType())
                 .build();
     }
 }

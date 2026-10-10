@@ -1,0 +1,36 @@
+type Query {
+    accounts: [BankAccount!]!
+    accountById(id: String!): BankAccount
+}
+
+type Mutation {
+    addAccount(bankAccountDTO: BankAccountRequestDTO!): BankAccountResponseDTO!
+    updateAccount(id: String!, bankAccountDTO: BankAccountRequestDTO!): BankAccountResponseDTO!
+}
+
+type BankAccount {
+    id: String!
+    createdAt: String
+    balance: Float
+    currency: String
+    type: AccountType
+}
+
+type BankAccountResponseDTO {
+    id: String!
+    createdAt: String
+    balance: Float
+    currency: String
+    type: AccountType
+}
+
+input BankAccountRequestDTO {
+    balance: Float
+    currency: String
+    type: AccountType
+}
+
+enum AccountType {
+    CURRENT_ACCOUNT
+    SAVING_ACCOUNT
+}
