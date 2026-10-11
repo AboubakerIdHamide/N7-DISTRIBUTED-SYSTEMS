@@ -1,0 +1,40 @@
+# Maven build output (also covers nested services in this project)
+**/target/
+
+# IDE metadata
+.idea/
+*.iml
+out/
+.vscode/
+.classpath
+.project
+.settings/
+.factorypath
+/nbproject/private/
+/build/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# Local secrets and environment overrides
+.env
+.env.*
+!.env.example
+application-local.properties
+application-local.yml
+application-local.yaml
+
+# Logs and JVM crash output
+*.log
+/logs/
+hs_err_pid*
+replay_pid*
+
+# Temporary editor and operating-system files
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+Desktop.ini
