@@ -22,6 +22,11 @@ public class InventoryServiceApplication {
                     .price(34000)
                     .quantity(12)
                     .build());
+            productRepository.save(Product.builder()
+                    .name("Printer")
+                    .price(1200)
+                    .quantity(10)
+                    .build());
         };
     }
 }
