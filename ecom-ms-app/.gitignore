@@ -1,0 +1,17 @@
+# Maven build output (including output from every child module)
+**/target/
+
+# Packaged binaries; keep the Maven Wrapper JAR if one is added
+*.jar
+!**/.mvn/wrapper/maven-wrapper.jar
+
+# IDE files
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+
+# OS metadata
+.DS_Store
+Thumbs.db
