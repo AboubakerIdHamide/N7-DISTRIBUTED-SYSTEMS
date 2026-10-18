@@ -5,6 +5,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Transient;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import net.app.billingservice.model.Product;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -27,6 +30,10 @@ public class ProductItem {
     private int quantity;
     private double price;
 
+    @Transient
+    private Product product;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne
     private Bill bill;
 }

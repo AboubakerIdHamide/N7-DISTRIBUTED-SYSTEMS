@@ -7,11 +7,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import net.app.billingservice.model.Customer;
 
 import java.util.Date;
 import java.util.List;
@@ -35,4 +37,7 @@ public class Bill {
 
     @OneToMany(mappedBy = "bill")
     private List<ProductItem> productItems;
+
+    @Transient
+    private Customer customer;
 }
