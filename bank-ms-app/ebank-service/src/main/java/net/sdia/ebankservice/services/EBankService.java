@@ -3,6 +3,8 @@ package net.sdia.ebankservice.services;
 import net.sdia.ebankservice.entities.BankAccount;
 import net.sdia.ebankservice.feign.CustomerRestClient;
 import net.sdia.ebankservice.repositories.BankAccountRepository;
+import org.springaicommunity.mcp.annotation.McpTool;
+import org.springaicommunity.mcp.annotation.McpToolParam;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,6 +38,22 @@ public class EBankService {
 
     public BankAccount saveAccount(BankAccount bankAccount) {
         return loadCustomer(bankAccountRepository.save(bankAccount));
+    }
+
+    @McpTool(description = "get all bank accounts")
+    public List<BankAccount> getAllBankAccounts() {
+        return bankAccountRepository.findAll();
+    }
+
+    @McpTool(description = "get bank account by ID")
+    public BankAccount getBankAccountById(@McpToolParam(description = "bank account ID") String id) {
+        return bankAccountRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Account not found"));
+    }
+
+    @McpTool(description = "save bank account")
+    public BankAccount saveBankAccount(@McpToolParam(description = "Bank account with its balance, type and customer ID") BankAccount bankAccount) {
+        return bankAccountRepository.save(bankAccount);
     }
 
     private BankAccount loadCustomer(BankAccount bankAccount) {

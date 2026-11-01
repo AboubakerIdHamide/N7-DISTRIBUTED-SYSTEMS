@@ -2,6 +2,8 @@ package net.sdia.customerservice.services;
 
 import net.sdia.customerservice.entities.Customer;
 import net.sdia.customerservice.repositories.CustomerRepository;
+import org.springaicommunity.mcp.annotation.McpTool;
+import org.springaicommunity.mcp.annotation.McpToolParam;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,15 +17,23 @@ public class CustomerService {
         this.customerRepository = customerRepository;
     }
 
+    @McpTool(description = "Get all customers")
     public List<Customer> getAllCustomers() {
         return customerRepository.findAll();
+    }
+
+    @McpTool(description = "Find customer by ID")
+    public Customer findCustomerById(@McpToolParam(description = "customer ID") Long id) {
+        return customerRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Customer Not found"));
     }
 
     public Optional<Customer> getCustomer(Long id) {
         return customerRepository.findById(id);
     }
 
-    public Customer saveCustomer(Customer customer) {
+    @McpTool(description = "New customer")
+    public Customer saveCustomer(@McpToolParam(description = "new customer with its name and email") Customer customer) {
         return customerRepository.save(customer);
     }
 }
