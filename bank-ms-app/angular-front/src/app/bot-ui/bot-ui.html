@@ -1,0 +1,15 @@
+<div class="p-3">
+  <form class="mb-3" (ngSubmit)="askAgent()">
+    <div class="input-group">
+      <input class="form-control" name="query" [(ngModel)]="query" placeholder="Ask the bank assistant">
+      <button class="btn btn-primary" type="submit" aria-label="Search">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </form>
+  @if (responses; as answer) {
+    <div class="border rounded p-4">
+      <markdown [data]="answer | async"></markdown>
+    </div>
+  }
+</div>

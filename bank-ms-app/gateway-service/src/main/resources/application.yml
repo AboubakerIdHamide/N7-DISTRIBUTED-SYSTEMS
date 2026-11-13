@@ -1,0 +1,41 @@
+server:
+  port: 9999
+
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      server:
+        webflux:
+          discovery:
+            locator:
+              enabled: true
+              lower-case-service-id: true
+
+# Static routes shown earlier in the lesson, before switching to Eureka discovery:
+# spring:
+#   cloud:
+#     gateway:
+#       server:
+#         webflux:
+#           routes:
+#             - id: customer-service
+#               uri: http://localhost:8056
+#               predicates:
+#                 - Path=/customers/**
+#             - id: ebank-service
+#               uri: http://localhost:8057
+#               predicates:
+#                 - Path=/accounts/**
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
